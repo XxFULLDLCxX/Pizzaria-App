@@ -10,13 +10,13 @@
     "dev:load-envs": "dotenv -e .env.local"
   },
   "dependencies": {
-    "next": "14.1.4",
     "dotenv": "^16.4.5",
+    "next": "14.1.4",
     "react": "^18",
-    "react-dom": "^18",
-    "react-redux": "^9.1.0"
+    "react-dom": "^18"
   },
   "devDependencies": {
+    "@prisma/client": "^5.11.0",
     "@reduxjs/toolkit": "^2.2.2",
     "@types/node": "^20",
     "@types/react": "^18",
