@@ -6,7 +6,7 @@ export const config = {
 
 const publicRoutes = ['/', '/about-me', '/auth/sign-up', '/auth/sign-in'];
 
-// export async function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
 //   console.log(req.nextUrl);
 
 //   const pathname = req.nextUrl.pathname;
@@ -26,16 +26,16 @@ const publicRoutes = ['/', '/about-me', '/auth/sign-up', '/auth/sign-in'];
 //   //   return NextResponse.redirect(new URL('/portal/login', req.url));
 //   // }
 
-//   return NextResponse.next();
-// }
+  return NextResponse.next();
+}
 
-const logger = (store) => (next) => (action) => {
-  console.group(action.type);
-  console.info('dispatching', action);
-  let result = next(action);
-  console.log('next state', store.getState());
-  console.groupEnd();
-  return result;
-};
+// const logger = (store) => (next) => (action) => {
+//   console.group(action.type);
+//   console.info('dispatching', action);
+//   let result = next(action);
+//   console.log('next state', store.getState());
+//   console.groupEnd();
+//   return result;
+// };
 
-export default logger;
+// export default logger;

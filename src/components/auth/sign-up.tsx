@@ -1,0 +1,121 @@
+'use client';
+
+import * as z from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { Input } from '@/components/ui/input';
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+
+import { CardWrapper } from '@/components/auth/card-wrapper';
+import { SignUpSchema } from '@/schemas';
+import { Button } from '@/components/ui/button';
+import { FormError } from '@/components/form-error';
+import { FormSuccess } from '@/components/form-success';
+import { useState, useTransition } from 'react';
+import { register } from '@/actions/auth';
+
+export function SignUp() {
+  const [error, setError] = useState<string | undefined>();
+  const [success, setSuccess] = useState<string | undefined>();
+  const [isPending, startTransition] = useTransition();
+  const form = useForm<z.infer<typeof SignUpSchema>>({
+    resolver: zodResolver(SignUpSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+  });
+  const onSubmit = (values: z.infer<typeof SignUpSchema>) => {
+    setError('');
+    setSuccess('');
+
+    startTransition(() => {
+      register(values).then((data) => {
+        setError(data.error);
+        setSuccess(data.success);
+      });
+    });
+  };
+  return (
+    <div>
+      <CardWrapper
+        headerLabel="Crie uma conta"
+        backButtonLabel="Já tem uma conta?"
+        backButtonHref="/auth/sign-in"
+        showSocial
+      >
+        <Form {...form}>
+          <form action="" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <div className="space-y-4">
+            <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Nome
+                      <FormMessage className="inline float-right" />
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="José Matheus" disabled={isPending} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      E-mail
+                      <FormMessage className="inline-block float-right" />
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="jose.matheus@example.com"
+                        type="email"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Senha
+                      <FormMessage className="inline float-right" />
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="*****" type="password" disabled={isPending} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+            <FormError message={error} />
+            <FormSuccess message={success} />
+            <Button type="submit" className="w-full" disabled={isPending}>
+              Cadastrar
+            </Button>
+          </form>
+        </Form>
+      </CardWrapper>
+    </div>
+  );
+}
