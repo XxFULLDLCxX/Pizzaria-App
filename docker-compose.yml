@@ -15,8 +15,6 @@ services:
       - 3000:3000
     networks:
       - postgres
-    depends_on:
-      - postgres
     restart: unless-stopped
     
   postgres:
