@@ -26,7 +26,7 @@ export const SignUpSchema = z.object({
     .email({
       message: 'Formato do e-mail inválido',
     }),
-  password: z.string().min(5, {
-    message: 'A senha deve ter pelo menos 5 caracteres.',
+  password: z.string().min(4, {
+    message: 'A senha deve ter pelo menos 4 caracteres.',
   }),
 });

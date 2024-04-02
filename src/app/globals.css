@@ -68,6 +68,9 @@
 
 body {
   scrollbar-width: 0px;
+  /* Adjusts height, accounting for header (64px) */
+  height: max(calc(100svh - 64px), 520px);
+  background-color: red;
 }
 body::-webkit-scrollbar {
   display: none;

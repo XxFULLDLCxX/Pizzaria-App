@@ -20,8 +20,9 @@ import { SignInSchema } from '@/schemas';
 import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
-import { useState, useTransition } from 'react';
-import { login } from '@/actions/auth';
+import { useEffect, useState, useTransition } from 'react';
+import { login } from '@/modules/auth/actions/auth';
+import { useRouter } from 'next/navigation';
 
 export function SignIn() {
   const [error, setError] = useState<string | undefined>();
@@ -43,65 +44,80 @@ export function SignIn() {
         console.log(data);
         setError(data.error);
         setSuccess(data.success);
-
       });
     });
   };
+
+  const route = useRouter();
+  useEffect(() => {
+    if (success) {
+      route.push('/products');
+    }
+  }, [success]);
+
   return (
-    <div>
-      <CardWrapper
-        headerLabel="Bem-vindo de volta"
-        backButtonLabel="Não tem uma conta?"
-        backButtonHref="/auth/sign-up"
-        showSocial
-      >
-        <Form {...form}>
-          <form action="" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="space-y-4">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      E-mail
-                      <FormMessage className="inline-block float-right" />
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="jose.matheus@example.com"
-                        type="email"
-                        disabled={isPending}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Senha
-                      <FormMessage className="inline float-right" />
-                    </FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="*****" type="password" disabled={isPending} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-            <FormError message={error} />
-            <FormSuccess message={success} />
-            <Button type="submit" className="w-full shadow-sm" disabled={isPending}>
-              Login
-            </Button>
-          </form>
-        </Form>
-      </CardWrapper>
-    </div>
+    <CardWrapper
+      headerLabel="Bem-vindo de volta"
+      backButtonLabel="Não tem uma conta?"
+      backButtonHref="/auth/sign-up"
+    >
+      <Form {...form}>
+        <form action="" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className="space-y-4">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    E-mail
+                    <FormMessage className="inline-block float-right" />
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="jose.matheus@example.com"
+                      type="email"
+                      disabled={isPending}
+                      autoComplete="on"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Senha
+                    <FormMessage className="inline float-right" />
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="*****"
+                      type="password"
+                      disabled={isPending}
+                      autoComplete="on"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <FormError message={error} />
+          <FormSuccess message={success} />
+          <Button
+            type="submit"
+            className="w-full shadow-sm dark:bg-emerald-800 dark:text-gray-200"
+            disabled={isPending}
+          >
+            Login
+          </Button>
+        </form>
+      </Form>
+    </CardWrapper>
   );
 }

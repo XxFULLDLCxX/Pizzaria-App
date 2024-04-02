@@ -20,8 +20,9 @@ import { SignUpSchema } from '@/schemas';
 import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
-import { useState, useTransition } from 'react';
-import { register } from '@/actions/auth';
+import { useEffect, useState, useTransition } from 'react';
+import { register } from '@/modules/auth/actions/auth';
+import { useRouter } from 'next/navigation';
 
 export function SignUp() {
   const [error, setError] = useState<string | undefined>();
@@ -43,79 +44,100 @@ export function SignUp() {
       register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
+        console.log('Tudo certo', data);
       });
     });
   };
+  const route = useRouter();
+  useEffect(() => {
+    if (success) {
+      route.push('/products');
+    }
+  }, [success]);
+
   return (
-    <div>
-      <CardWrapper
-        headerLabel="Crie uma conta"
-        backButtonLabel="Já tem uma conta?"
-        backButtonHref="/auth/sign-in"
-        showSocial
-      >
-        <Form {...form}>
-          <form action="" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="space-y-4">
+    <CardWrapper
+      headerLabel="Crie uma conta"
+      backButtonLabel="Já tem uma conta?"
+      backButtonHref="/auth/sign-in"
+    >
+      <Form {...form}>
+        <form action="" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className="space-y-4">
             <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Nome
-                      <FormMessage className="inline float-right" />
-                    </FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="José Matheus" disabled={isPending} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      E-mail
-                      <FormMessage className="inline-block float-right" />
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="jose.matheus@example.com"
-                        type="email"
-                        disabled={isPending}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Senha
-                      <FormMessage className="inline float-right" />
-                    </FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="*****" type="password" disabled={isPending} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-            <FormError message={error} />
-            <FormSuccess message={success} />
-            <Button type="submit" className="w-full shadow-sm" disabled={isPending}>
-              Cadastrar
-            </Button>
-          </form>
-        </Form>
-      </CardWrapper>
-    </div>
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Nome
+                    <FormMessage className="inline float-right" />
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="José Matheus"
+                      disabled={isPending}
+                      autoComplete="on"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    E-mail
+                    <FormMessage className="inline-block float-right" />
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="jose.matheus@example.com"
+                      type="email"
+                      disabled={isPending}
+                      autoComplete="on"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Senha
+                    <FormMessage className="inline float-right" />
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="*****"
+                      type="password"
+                      disabled={isPending}
+                      autoComplete="on"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <FormError message={error} />
+          <FormSuccess message={success} />
+          <Button
+            type="submit"
+            className="w-full shadow-sm dark:bg-emerald-800 dark:text-gray-200"
+            disabled={isPending}
+          >
+            Cadastrar
+          </Button>
+        </form>
+      </Form>
+    </CardWrapper>
   );
 }
