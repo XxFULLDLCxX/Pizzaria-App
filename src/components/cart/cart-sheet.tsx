@@ -15,17 +15,16 @@ import { AiOutlineShoppingCart, AiOutlineShopping } from 'react-icons/ai';
 
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import { useState } from 'react';
 import { CartProductItem } from './cart-product-item';
-import { useAppSelector } from '@/lib/features/common/hooks';
-import { CartState } from '@/lib/features/cart/cart-slice';
+import { useAppDispatch, useAppSelector } from '@/lib/features/common/hooks';
+import { CartState, cleanItems } from '@/lib/features/cart/cart-slice';
 import { info } from '@/components/utils/info';
 
-interface MenuProps {}
+interface CartProps { }
 
-export function CartSheet({}: MenuProps) {
-  const [checkout, setCheckout] = useState(false);
+export function CartSheet({ }: CartProps) {
   const { items, total } = useAppSelector(({ cart }: { cart: CartState }) => cart);
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -35,7 +34,7 @@ export function CartSheet({}: MenuProps) {
           asChild
         >
           <div>
-            <span className="sr-only">Open main menu</span>
+            <span className="sr-only">Open shooping cart</span>
             <AiOutlineShoppingCart
               className="h-6 w-6 absolute inset-0 left-[-5px] m-auto"
               aria-hidden="true"
@@ -81,7 +80,10 @@ export function CartSheet({}: MenuProps) {
               </h2>
               <SheetClose asChild className="">
                 <Button
-                  onClick={() => info.success({ text: 'Comprar Feita ', total: total?.toFixed(2) })}
+                  onClick={() => {
+                    info.success({ text: 'Compra feita! ', total: total?.toFixed(2) });
+                    dispatch(cleanItems());
+                  }}
                   type="submit"
                   className="bg-emerald-600 font-bold text-gray-200 text-lg h-8"
                   disabled={items.length === 0}

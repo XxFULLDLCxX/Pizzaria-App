@@ -26,7 +26,7 @@ export function ProductAddToCart({ data, ...restProps }: ProductAddToCart) {
           Item adicionado ao carrinho.
         </h1>
         <button className="absolute top-2 right-2 h-6 w-6 p-0" onClick={() => toast.dismiss(t)}>
-          <IoClose size={'14x14'} className="text-emerald-950 dark:text-emerald-200" />
+          <IoClose size="26" className="text-emerald-950 dark:text-emerald-200" />
         </button>
       </div>
     ));

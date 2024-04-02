@@ -13,7 +13,7 @@ export function success({ text, total }: ToastSuccessProps) {
         {text}<span>R${total}</span>
       </h1>
       <button className="absolute top-2 right-2 h-6 w-6 p-0" onClick={() => toast.dismiss(t)}>
-        <IoClose size={'14x14'} />
+        <IoClose size="26" />
       </button>
     </div>
   ));
