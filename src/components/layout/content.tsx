@@ -6,7 +6,7 @@ interface ContentProps {
 
 export function Content({ children }: ContentProps) {
   return (
-    <main className="flex items-center justify-center h-full bg-sky-600">
+    <main className="flex items-center justify-center h-full">
       {children}
     </main>
   );

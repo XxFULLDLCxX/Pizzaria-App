@@ -1,10 +1,12 @@
 import { Card } from '../ui/card';
-import { ProductDiv } from './product-types';
+import { Product } from './product-@types';
 
-interface ProductCard extends ProductDiv {
-
-}
+interface ProductCard extends Product { }
 
 export function ProductCard({ children, ...restProps }: ProductCard) {
-  return <Card className="shadow-md w-full bg-red-400" {...restProps}>{children}</Card>;
+  return (
+    <Card className="shadow-md w-full bg-red-400" {...restProps}>
+      {children}
+    </Card>
+  );
 }

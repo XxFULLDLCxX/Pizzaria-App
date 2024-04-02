@@ -1,9 +1,7 @@
 import { CardContent } from '@/components/ui/card';
-import { ProductDiv } from './product-types';
+import { Product } from './product-@types';
 
-interface ProductContent extends ProductDiv {
-
-}
+interface ProductContent extends Product { }
 
 export function ProductContent({ children, ...restProps }: ProductContent) {
   return (

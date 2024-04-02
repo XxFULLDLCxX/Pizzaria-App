@@ -33,8 +33,6 @@ export const login = async (values: z.infer<typeof SignInSchema>) => {
 export const register = async (values: z.infer<typeof SignUpSchema>) => {
   const validadedFields = SignUpSchema.safeParse(values);
 
-  console.log('Até aqui tudo bem');
-
   if (!validadedFields.success) {
     return { error: 'Cadastro mal-sucedido! Credenciais inválidas.' };
   }
@@ -58,6 +56,5 @@ export const register = async (values: z.infer<typeof SignUpSchema>) => {
     },
   });
 
-  console.log(result);
   return { success: 'Cadastro bem-sucedido!' };
 };

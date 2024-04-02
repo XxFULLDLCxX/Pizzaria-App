@@ -16,7 +16,7 @@ export interface ProductProps {
 export function ProductItem({ data }: ProductProps) {
   return (
     <Product.Card className="bg-blue-400">
-      <Product.AddToCart price={data.price.toFixed(2)}></Product.AddToCart>
+      <Product.AddToCart data={data}></Product.AddToCart>
     </Product.Card>
   );
 }

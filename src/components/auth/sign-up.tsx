@@ -44,7 +44,6 @@ export function SignUp() {
       register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
-        console.log('Tudo certo', data);
       });
     });
   };

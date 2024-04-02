@@ -1,8 +1,7 @@
 import { CardFooter } from '@/components/ui/card';
-import { ProductDiv } from './product-types';
+import { Product } from './product-@types';
 
-interface ProductFooter extends ProductDiv {
-}
+interface ProductFooter extends Product { }
 
 export function ProductFooter({ children, ...restProps }: ProductFooter) {
   return (

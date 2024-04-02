@@ -1,8 +1,7 @@
 import { CardHeader } from '@/components/ui/card';
-import { ProductDiv } from './product-types';
+import { Product } from './product-@types';
 
-interface ProductHeader extends ProductDiv {
-}
+interface ProductHeader extends Product { }
 
 export function ProductHeader({ children, ...restProps }: ProductHeader) {
   return (

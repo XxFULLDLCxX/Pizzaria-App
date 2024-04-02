@@ -41,7 +41,6 @@ export function SignIn() {
 
     startTransition(() => {
       login(values).then((data) => {
-        console.log(data);
         setError(data.error);
         setSuccess(data.success);
       });

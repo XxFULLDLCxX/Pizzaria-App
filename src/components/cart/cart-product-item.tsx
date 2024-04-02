@@ -13,7 +13,10 @@ export function CartProductItem({ data }: ProductProps) {
         <p>R$ {price.toFixed(2)}</p>
       </Product.Content>
       <Product.Footer className="relative ml-auto h-full w-6">
-        <Product.RemoveToCart className="absolute top-[-2px] right-[-2px] z-30" />
+        <Product.RemoveToCart
+          data={data}
+          className="absolute top-[-2px] right-[-2px] z-30 hover:h-10 hover:w-10"
+        />
       </Product.Footer>
     </Product.Card>
   );
