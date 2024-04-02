@@ -66,6 +66,17 @@
   }
 }
 
+body {
+  scrollbar-width: 0px;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.cart-scroll {
+  height: calc(100% - 60px);
+}
+
 @layer base {
   * {
     @apply border-border;

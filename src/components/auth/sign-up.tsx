@@ -110,7 +110,7 @@ export function SignUp() {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button type="submit" className="w-full" disabled={isPending}>
+            <Button type="submit" className="w-full shadow-sm" disabled={isPending}>
               Cadastrar
             </Button>
           </form>
