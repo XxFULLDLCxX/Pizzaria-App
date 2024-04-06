@@ -1,12 +1,13 @@
 import { ProductProps } from '@/components/products/product-item';
 import { Product } from '@/components/product';
+import Image from 'next/image';
 
 export function CartProductItem({ data }: ProductProps) {
   const { name, price, image } = data;
   return (
     <Product.Card className="flex justify-center items-center p-0 h-20">
       <Product.Header className={`bg-[${image}] p-0 bg-cover`}>
-        <img src={image} alt={name} className="w-full h-20 rounded-sm" />
+        <Image src={image} alt={name} className="w-full h-20 rounded-sm" />
       </Product.Header>
       <Product.Content>
         <h1>{name}</h1>

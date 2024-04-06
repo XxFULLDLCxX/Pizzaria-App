@@ -52,7 +52,7 @@ export function SignIn() {
     if (success) {
       route.push('/products');
     }
-  }, [success]);
+  }, [success, route]);
 
   return (
     <CardWrapper

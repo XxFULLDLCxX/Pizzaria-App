@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "dev:load-envs": "pnpm exec dotenv -e .env.local --"
+    "local:prisma": "prisma generate && prisma migrate dev",
+    "local:host-setup": "bash setup.sh $(npm prefix)",
+    "deploy:prisma": "prisma generate && prisma migrate deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
