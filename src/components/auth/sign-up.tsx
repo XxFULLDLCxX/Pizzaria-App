@@ -52,7 +52,7 @@ export function SignUp() {
     if (success) {
       route.push('/products');
     }
-  }, [success]);
+  }, [success, route]);
 
   return (
     <CardWrapper
