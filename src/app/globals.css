@@ -53,12 +53,17 @@ body {
   scrollbar-width: 0px;
   /* Adjusts height, accounting for header (64px) */
   height: max(calc(100svh - 64px), 520px);
+  max-height: 100svh;
 }
 body::-webkit-scrollbar {
   display: none;
 }
 
 .cart-scroll {
+  height: calc(100% - 83px);
+}
+
+.max-h {
   height: calc(100% - 83px);
 }
 
