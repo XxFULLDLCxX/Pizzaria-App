@@ -52,7 +52,7 @@ export function CartSheet({ }: CartProps) {
               <AiOutlineShopping className="text-left ml-[-2px]" />
               Carrinho
             </SheetTitle>
-            <SheetDescription className="text-left pb-[1px]">
+            <SheetDescription className="text-left pb-1">
               Retire o que não quiser comprar.
             </SheetDescription>
           </SheetHeader>
@@ -69,11 +69,11 @@ export function CartSheet({ }: CartProps) {
             </ScrollArea>
           ) : (
             <div className="absolute inset-0 h-max m-auto">
-              <h2 className="text-center font-bold text-xl">Ainda não há items no Carrinho.</h2>
+                <h2 className="text-center font-bold text-xl">Ainda não há<br />items no Carrinho.</h2>
             </div>
           )}
           <Separator />
-          <SheetFooter className="absolute bottom-0 left-0 w-full h-[64px]">
+          <SheetFooter className="absolute bottom-0 left-0 w-full h-[64px] py-5">
             <div className="flex items-center justify-between px-5 w-full">
               <h2 className="font-bold text-md mr-auto flex items-center gap-1">
                 TOTAL: <span className="text-lg">{total.toFixed(2)}</span>

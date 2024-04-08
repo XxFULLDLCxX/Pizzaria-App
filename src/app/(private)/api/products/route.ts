@@ -1,8 +1,8 @@
 import { db } from '@/lib/db';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: NextRequest, res: NextResponse) {
   const products = await db.product.findMany();
   return Response.json({ products });
 }

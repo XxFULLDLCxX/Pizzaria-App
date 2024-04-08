@@ -1,12 +1,6 @@
-import { Card } from '../ui/card';
+import { ProductData } from '@/lib/protocols';
 import { Product } from '../product';
-
-interface ProductData {
-  id: number;
-  name: string;
-  image: string;
-  price: number;
-}
+import Image from 'next/image';
 
 export interface ProductProps {
   data: ProductData;
@@ -15,9 +9,15 @@ export interface ProductProps {
 export function ProductItem({ data }: ProductProps) {
   const { name, image, price } = data;
   return (
-    <Product.Card className="">
+    <Product.Card className="h-max">
       <Product.Header className={`bg-[${image}] p-0 bg-cover`}>
-        <img src={image} alt={name} className="w-full h-20 rounded-sm" />
+        <Image
+          className="w-full h-32 rounded-sm object-cover"
+          src={image}
+          alt={name}
+          width={200}
+          height={100}
+        />
       </Product.Header>
       <Product.Content className="p-4">
         <h1 className="text-md">{name}</h1>

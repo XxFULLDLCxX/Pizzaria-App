@@ -13,7 +13,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
             <Header.Logo />
             <div className="flex justify-center items-center gap-4">
               <ModeToggle />
-              <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+              <div className="lg:flex lg:flex-1 lg:justify-end">
                 <Link
                   href="/auth/sign-in"
                   className="flex justify-center items-center gap-1 text-sm font-semibold leading-6 text-emerald-800 dark:text-emerald-200"
